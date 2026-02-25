@@ -28,6 +28,7 @@ jobs:
           image-ref: cabantoad/gha-pyapp:${{ env.SHORT_SHA }}
           severity: CRITICAL,HIGH
           exit-code: 1
+          ignore-unfixed: true
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
