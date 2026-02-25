@@ -23,9 +23,7 @@ jobs:
           push: true
           tags: cabantoad/gha-pyapp:${{ env.SHORT_SHA }}
       - name: Install yq
-        run: |
-          sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
-          sudo chmod +x /usr/bin/yq
+        uses: mikefarah/yq@v4.44.3
       - name: Update deployment.yml with latest docker tag
         run: |
           # Short commit hash
