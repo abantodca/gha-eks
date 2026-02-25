@@ -20,6 +20,18 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          push: false
+          tags: cabantoad/gha-pyapp:${{ env.SHORT_SHA }}
+      - name: Trivy Image Scan
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: cabantoad/gha-pyapp:${{ env.SHORT_SHA }}
+          severity: CRITICAL,HIGH
+          exit-code: 1
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
           push: true
           tags: cabantoad/gha-pyapp:${{ env.SHORT_SHA }}
       - name: Install yq
